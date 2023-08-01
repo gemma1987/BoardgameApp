@@ -1,2 +1,2 @@
-# TheBookclub2
-This is the new Bookclub application, it will be available on Android in the end
+# The Mobile Boardgame statistics app
+To keep up with games wherever we are
