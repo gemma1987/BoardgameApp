@@ -1,6 +1,6 @@
 package com.boardgameApp.Domain;
 
-// enum for PersonType
-public enum PersonType {
+// enum for UserType
+public enum UserType {
     USER, MODERATOR, ADMIN
 }

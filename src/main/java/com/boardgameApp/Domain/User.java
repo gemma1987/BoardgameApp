@@ -1,6 +1,5 @@
 package com.boardgameApp.Domain;
 
-import com.boardgameApp.Repositories.PersonRepository;
 import com.boardgameApp.Service.MyGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
@@ -12,33 +11,29 @@ import java.util.Objects;
 @Entity
 // marks a property to be ignored
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-// @Table = This annotation tells the program to call the table 'users'.
+// This annotation tells the program to call the table 'users'.
 @Table(name = "users")
-public class Person {
+public class User {
 
 
-    private PersonType userTypeID;
-    private String userName;
+    private UserType userType;
+
     // String is valid as long as it's not null
+    @Id
+    private @NotBlank String userName;
+
     private @NotBlank String emailAddress;
     private @NotBlank String password;
     private @NotBlank boolean loggedIn;
 
-    @Id
-    @GeneratedValue(generator = MyGenerator.generatorName)
-    @GenericGenerator(name = MyGenerator.generatorName, strategy = "com.boardgameApp.Service.MyGenerator")
-    private String userID;
-
-
-    public Person() {
+    public User() {
     }
 
-    public Person(String name, @NotBlank String emailAddress, @NotBlank String password, PersonType userTypeID, String userID, boolean loggedIn) {
-        this.userName = name;
+    public User(String userName, @NotBlank String emailAddress, @NotBlank String password, UserType userType, boolean loggedIn) {
+        this.userName = userName;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.userTypeID = userTypeID;
-        this.userID = userID;
+        this.userType = userType;
         this.loggedIn = loggedIn;
     }
 
@@ -66,22 +61,13 @@ public class Person {
         this.password = password;
     }
 
-    public PersonType getUserTypeID() {
-        return userTypeID;
+    public UserType getUserTypeID() {
+        return userType;
     }
 
-    public void setUserTypeID(PersonType userTypeID) {
-        this.userTypeID = userTypeID;
+    public void setUserTypeID(UserType userType) {
+        this.userType = userType;
     }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
 
     public boolean isLoggedIn() {
         return loggedIn;
@@ -90,32 +76,33 @@ public class Person {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-
-    @Override
     /*
-    We need to use this at a later point to compare an object that's given in by the user, with an object from our database.
-     */
+        Overrides the standard equals method
+    */
+    @Override
+
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person person)) return false;
-        return Objects.equals(emailAddress, person.emailAddress) &&
-                Objects.equals(password, person.password);
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(emailAddress, user.emailAddress) &&
+                Objects.equals(password, user.password);
     }
-    @Override
     /*
-    This function is used to generate a hash value of the object.
+    Overrides the standard hashCode() method.
      */
+    @Override
     public int hashCode() {
-        return Objects.hash(userID, userTypeID, emailAddress, password,
+        return Objects.hash(userName, userType, emailAddress, password,
                 loggedIn);
     }
-    @Override
     /*
-    Makes a string of the information about the object.
+    Overrides the standard toString() method.
      */
+    @Override
+
     public String toString() {
-        return "Person{" +
-                "id=" + userID +
+        return "User{" +
+                "userName=" + userName +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
                 ", loggedIn=" + loggedIn +

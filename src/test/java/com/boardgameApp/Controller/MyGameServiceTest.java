@@ -14,10 +14,10 @@ class MyGameServiceTest {
     @BeforeEach
     public void setUp() {
         GameRepository gameRepository = mock(GameRepository.class);
-        PersonRepository userRepository = mock(PersonRepository.class);
+        UserRepository userRepository = mock(UserRepository.class);
 
-        Person person = mock(Person.class);
-        when(userRepository.getById(1)).thenReturn(person);
+        User user = mock(User.class);
+        when(userRepository.getById("Gemma")).thenReturn(user);
 
         Game game = mock(Game.class);
         when(gameRepository.getById(1234L)).thenReturn(game);

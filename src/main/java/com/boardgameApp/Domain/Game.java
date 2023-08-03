@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-// tells the program to call the table 'book'.
+// tells the program to call the table 'game'.
 @Table(name = "game")
 
 // marks a property to be ignored
@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class Game implements Serializable{
     private String title;
 
+    //GenericGenerator is being called to give in the generated value
     @Id
     @GeneratedValue(generator = MyGenerator.generatorName)
     @GenericGenerator(name = MyGenerator.generatorName, strategy = "com.boardgameApp.Service.MyGenerator")

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/games")
 public class GameController {
 
     private final GameRepository gameRepository;
@@ -18,7 +18,7 @@ public class GameController {
     }
 
     /*
-    Get everything that's in the map /books
+    Get everything that's in the map /games
      */
 
     @GetMapping
@@ -27,37 +27,23 @@ public class GameController {
     }
 
     /*
-    Create a book a.k.a. Post details of a book to the database
+    Create a game a.k.a. Post details of a game to the database
      */
 
     @PostMapping
-    ResponseEntity<Game> newBook(@RequestBody Game newGame) {
+    ResponseEntity<Game> newGame(@RequestBody Game newGame) {
 
         Game game = gameRepository.save(newGame);
         return new ResponseEntity<>(game, HttpStatus.CREATED);
     }
 
     /*
-    Delete a book by putting the id (isbn) in the request
-     */
-
-    @DeleteMapping("/{isbn}")
-    public ResponseEntity<HttpStatus> deleteBook(@PathVariable Long isbn) {
-
-        if ((!gameRepository.existsById(isbn))) {
-            return ResponseEntity.notFound().build();
-        }
-        gameRepository.deleteById(isbn);
-        return ResponseEntity.noContent().build();
-    }
-
-    /*
-    Update a book by putting the id (isbn) in the request
+    Update a game by putting the id (gameID) in the request
     */
 
-    @PutMapping("/{isbn}")
-    ResponseEntity<Game> updateGame(@RequestBody Game newGame, @PathVariable Long isbn) {
-        Optional<Game> optionalGame = gameRepository.findById(isbn);
+    @PutMapping("/{gameID}")
+    ResponseEntity<Game> updateGame(@RequestBody Game newGame, @PathVariable Long gameID) {
+        Optional<Game> optionalGame = gameRepository.findById(gameID);
 
         if (optionalGame.isPresent()) {
             Game game = optionalGame.get();
@@ -69,5 +55,17 @@ public class GameController {
         }
     }
 
+    /*
+    Delete a game by putting the id (gameID) in the request
+     */
+    @DeleteMapping("/{gameID}")
+    public ResponseEntity<HttpStatus> deleteGame(@PathVariable Long gameID) {
+
+        if ((!gameRepository.existsById(gameID))) {
+            return ResponseEntity.notFound().build();
+        }
+        gameRepository.deleteById(gameID);
+        return ResponseEntity.noContent().build();
+    }
 
 }
