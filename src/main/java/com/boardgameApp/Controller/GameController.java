@@ -5,6 +5,8 @@ import com.boardgameApp.Repositories.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,11 +32,18 @@ public class GameController {
     Create a game a.k.a. Post details of a game to the database
      */
 
-    @PostMapping
+    @PostMapping("/addGame")
     ResponseEntity<Game> newGame(@RequestBody Game newGame) {
+        List<Game> allGames = gameRepository.findAll();
+        for (Game game : allGames) {
+            if(game.getTitle().equals(newGame.getTitle())){
 
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
         Game game = gameRepository.save(newGame);
         return new ResponseEntity<>(game, HttpStatus.CREATED);
+
     }
 
     /*

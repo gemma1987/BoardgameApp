@@ -22,8 +22,11 @@ public class Game implements Serializable{
     @GenericGenerator(name = MyGenerator.generatorName, strategy = "com.boardgameApp.Service.MyGenerator")
     private String id;
 
-    public Game(String title) {
+
+
+    public Game(String title, String id) {
         this.title = title;
+        this.id = id;
     }
 
     public Game() {
@@ -37,6 +40,12 @@ public class Game implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }
 

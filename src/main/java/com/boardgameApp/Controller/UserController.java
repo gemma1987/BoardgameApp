@@ -31,18 +31,11 @@ public class UserController {
     /*
     Only maps post requests, so every newly created user goes into the database table users
      */
-
+        //TODO Is this actually needed?
     @PostMapping
-    public String createUser(@RequestBody User newUser) {
-        List<User> allUsers = userRepository.findAll();
-
-        for (User  user : allUsers) {
-            if(newUser.getUserName().equals(user.getUserName())){
-                return "UserName " + user +" already exists";
-            }
-        }
-        userRepository.save(newUser);
-        return "Created person: " + newUser;
+    public String createUser(@RequestBody User user) {
+        userRepository.save(user);
+        return "Created user: " + user;
     }
 
     /*
@@ -51,16 +44,17 @@ public class UserController {
      */
 
     @PostMapping("/register")
-    public String registerUser(@Valid @RequestBody User newUser) {
+    ResponseEntity<User> registerUser(@Valid @RequestBody User newUser) {
         List<User> allUsers = userRepository.findAll();
 
         for (User  user : allUsers) {
             if(newUser.getUserName().equals(user.getUserName())){
-                return "A person with the username " + user.getUserName() +" already exists";
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
-        userRepository.save(newUser);
-        return "Created a new account with username: " + newUser.getUserName();
+
+        User user = userRepository.save(newUser);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     /*
