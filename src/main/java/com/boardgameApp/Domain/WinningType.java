@@ -1,6 +1,6 @@
 package com.boardgameApp.Domain;
 
-public enum winningType {
+public enum WinningType {
     POINTS,
     ROUNDS,
     TIMED

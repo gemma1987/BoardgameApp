@@ -26,7 +26,6 @@ public class Game implements Serializable{
     private int maxPlayers;
     private int startingPoints;
     private boolean pointsGoDown;
-
     @Column(nullable = true, length = 64)
     private String image;
     public Game() {
