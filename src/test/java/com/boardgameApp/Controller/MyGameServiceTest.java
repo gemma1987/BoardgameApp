@@ -20,7 +20,7 @@ class MyGameServiceTest {
         when(userRepository.getById("Gemma")).thenReturn(user);
 
         Game game = mock(Game.class);
-        when(gameRepository.getById(1234L)).thenReturn(game);
+        when(gameRepository.getById("1234L")).thenReturn(game);
 
 
         sut = new BoardgameAppServices(userRepository, gameRepository);

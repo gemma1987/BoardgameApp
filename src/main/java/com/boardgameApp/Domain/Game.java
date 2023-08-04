@@ -22,15 +22,25 @@ public class Game implements Serializable{
     @GenericGenerator(name = MyGenerator.generatorName, strategy = "com.boardgameApp.Service.MyGenerator")
     private String id;
 
+    private int minPlayers;
+    private int maxPlayers;
+    private int startingPoints;
+    private boolean pointsGoDown;
 
-
-    public Game(String title, String id) {
-        this.title = title;
-        this.id = id;
-    }
-
+    @Column(nullable = true, length = 64)
+    private String image;
     public Game() {
 
+    }
+
+    public Game(String title, String id, int minPlayers, int maxPlayers, int startingPoints, boolean pointsGoDown, String image) {
+        this.title = title;
+        this.id = id;
+        this.minPlayers = minPlayers;
+        this.maxPlayers = maxPlayers;
+        this.startingPoints = startingPoints;
+        this.pointsGoDown = pointsGoDown;
+        this.image = image;
     }
 
     public String getTitle() {
@@ -43,9 +53,55 @@ public class Game implements Serializable{
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getMinPlayers() {
+        return minPlayers;
+    }
+
+    public void setMinPlayers(int minPlayers) {
+        this.minPlayers = minPlayers;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
+    }
+
+    public int getStartingPoints() {
+        return startingPoints;
+    }
+
+    public void setStartingPoints(int startingPoints) {
+        this.startingPoints = startingPoints;
+    }
+
+    public boolean getPointsGoDown() {
+        return pointsGoDown;
+    }
+
+    public void setPointsGoDown(boolean pointsGoDown) {
+        this.pointsGoDown = pointsGoDown;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Transient
+    public String getImagePath() {
+        if (image == null || id == null) return null;
+
+        return "/Game-image/" + id + "/" + image;
     }
 }
 

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 The long is the id(primary key) of the class, in this case the gameID
  */
 @Repository
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<Game, String> {
 }

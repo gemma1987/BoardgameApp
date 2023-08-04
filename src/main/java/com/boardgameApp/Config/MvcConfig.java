@@ -12,11 +12,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        exposeDirectory("myBook-photos", registry);
+        exposeDirectory("game-photos", registry);
     }
 
     /*
-    Creates a path for the images that are uploaded (right now it is not in use), so that every id has its own folder with picture.
+    Creates a path for the images that are uploaded with the games, so that every id has its own folder with picture.
     If the picture exists it will be replaced
      */
 
