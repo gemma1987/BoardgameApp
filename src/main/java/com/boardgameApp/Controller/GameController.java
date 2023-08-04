@@ -61,7 +61,7 @@ public class GameController {
             game.setImage(fileName);
 
             Game saveGameImage = gameRepository.save(game);
-            
+
             //TODO is it better to keep this as a title or to do this with the id?
             String uploadDir = "game-image/" + saveGameImage.getTitle().toLowerCase().replace(" ", "-");
 
