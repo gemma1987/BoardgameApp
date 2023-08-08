@@ -1,6 +1,6 @@
 package com.boardgameApp.Repositories;
 
-import com.boardgameApp.Domain.MyGame;
+import com.boardgameApp.Domain.StartedGame;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MyGameRepository extends JpaRepository<MyGame, int> {
-    Optional<List<MyGame>> findAllByUserUserID(String userID);
+public interface StartedGameRepository extends JpaRepository<StartedGame, int> {
+    Optional<List<StartedGame>> findAllByUserUserID(String userID);
 
 }

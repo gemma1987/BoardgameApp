@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Random;
 
-public class MyGame {
-    @ManyToOne
+public class StartedGame {
+    @ManyToMany
     private List<User> players;
     @ManyToOne
     private Game game;
@@ -17,10 +17,10 @@ public class MyGame {
     @Id
     private static int gameCounter = 0;
 
-    public MyGame() {
+    public StartedGame() {
     }
 
-    public MyGame(List<User> players, Game games, WinningType winningType, int winningOrLosingAmount, boolean finished, User starterPlayer, User winner) {
+    public StartedGame(List<User> players, Game game, WinningType winningType, int winningOrLosingAmount, boolean finished, User winner) {
         Random random = new Random();
         this.players = players;
         this.game = game;
@@ -32,7 +32,7 @@ public class MyGame {
         gameCounter++;
     }
 
-    public MyGame(Game game, List<User> players) {
+    public StartedGame(Game game, List<User> players) {
         this.game = game;
         this.players = players;
     }
