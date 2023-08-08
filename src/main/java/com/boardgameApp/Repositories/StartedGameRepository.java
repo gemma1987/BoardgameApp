@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StartedGameRepository extends JpaRepository<StartedGame, int> {
+public interface StartedGameRepository extends JpaRepository<StartedGame, Integer> {
     Optional<List<StartedGame>> findAllByUserUserID(String userID);
 
 }
