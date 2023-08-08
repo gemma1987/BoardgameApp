@@ -4,32 +4,37 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Random;
 
-public class StartedGame {
+public class MyGame {
     @ManyToOne
     private List<User> players;
     @ManyToOne
-    private List<Game> games;
+    private Game game;
     private WinningType winningType;
     private int winningOrLosingAmount;
     private boolean finished;
     private User starterPlayer;
     private User winner;
     @Id
-    private static int gameNumber = 0;
+    private static int gameCounter = 0;
 
-    public StartedGame() {
+    public MyGame() {
     }
 
-    public StartedGame(List<User> players, List<Game> games, WinningType winningType, int winningOrLosingAmount, boolean finished, User starterPlayer, User winner) {
+    public MyGame(List<User> players, Game games, WinningType winningType, int winningOrLosingAmount, boolean finished, User starterPlayer, User winner) {
         Random random = new Random();
         this.players = players;
-        this.games = games;
+        this.game = game;
         this.winningType = winningType;
         this.winningOrLosingAmount = winningOrLosingAmount;
         this.finished = finished;
         this.starterPlayer = players.get(random.nextInt(players.size()));
         this.winner = winner;
-        gameNumber++;
+        gameCounter++;
+    }
+
+    public MyGame(Game game, List<User> players) {
+        this.game = game;
+        this.players = players;
     }
 
     public List<User> getPlayers() {
@@ -40,12 +45,12 @@ public class StartedGame {
         this.players = players;
     }
 
-    public List<Game> getGame() {
-        return games;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGame(List<Game> games) {
-        this.games = games;
+    public void setGame(Game games) {
+        this.game = game;
     }
 
     public WinningType getWinningType() {

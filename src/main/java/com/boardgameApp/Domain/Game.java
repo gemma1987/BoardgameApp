@@ -20,7 +20,7 @@ public class Game implements Serializable{
     @Id
     @GeneratedValue(generator = MyGenerator.generatorName)
     @GenericGenerator(name = MyGenerator.generatorName, strategy = "com.boardgameApp.Service.MyGenerator")
-    private String id;
+    private String gameId;
 
     private int minPlayers;
     private int maxPlayers;
@@ -32,9 +32,9 @@ public class Game implements Serializable{
 
     }
 
-    public Game(String title, String id, int minPlayers, int maxPlayers, int startingPoints, boolean pointsGoDown, String image) {
+    public Game(String title, String gameId, int minPlayers, int maxPlayers, int startingPoints, boolean pointsGoDown, String image) {
         this.title = title;
-        this.id = id;
+        this.gameId = gameId;
         this.minPlayers = minPlayers;
         this.maxPlayers = maxPlayers;
         this.startingPoints = startingPoints;
@@ -49,11 +49,11 @@ public class Game implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getId() {
-        return id;
+    public String getGameId() {
+        return gameId;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
     public int getMinPlayers() {
@@ -98,9 +98,9 @@ public class Game implements Serializable{
 
     @Transient
     public String getImagePath() {
-        if (image == null || id == null) return null;
+        if (image == null || gameId == null) return null;
 
-        return "/Game-image/" + id + "/" + image;
+        return "/Game-image/" + gameId + "/" + image;
     }
 }
 
